@@ -1,4 +1,3 @@
-import { onMounted } from 'vue';
 <script setup lang="ts">
 import SingleMovie from "./SingleMovie.vue";
 import { onMounted, ref } from "vue";

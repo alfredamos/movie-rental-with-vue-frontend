@@ -1,3 +1,22 @@
+<script setup lang="ts">
+
+interface Props {
+  cancelButton: string;
+  deleteMessage: string;
+  deleteTitle: string;
+  submitButton: string;  
+}
+
+const emit = defineEmits(['onDeleteItem'])
+
+const {cancelButton, deleteMessage, deleteTitle,submitButton} = defineProps<Props>()
+
+const deleteItem = (value: boolean) => {
+  emit('onDeleteItem', value)
+}
+
+</script>
+
 <template>
     <div class="backdrop">
   <div
@@ -43,19 +62,7 @@
   
 </template>
 
-<script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue';
-
-const {cancelButton, deleteMessage, deleteTitle, submitButton} = defineProps(['cancelButton', 'submitButton', 'deleteMessage', 'deleteTitle'])
-
-const emit = defineEmits(['onDelete'])
-
-function deleteItem(value: boolean){
-    emit('onDelete', value)
-}
-</script>
-
-<style>
+<style scoped>
 .backdrop{
     position: absolute;
     width: 100%;

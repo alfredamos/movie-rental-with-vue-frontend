@@ -4,8 +4,15 @@ import moment from "moment";
 
 interface Props {
   rental: ListRentalDto;
+isEdit?: boolean;
 }
 const props = defineProps<Props>();
+
+const emit = defineEmits(["deleteClick"]);
+
+const deleteClick = () => {
+  emit("deleteClick");
+};
 </script>
 <template>
   <div class="border pado">
@@ -33,15 +40,23 @@ const props = defineProps<Props>();
       </div>
       <div class="card-footer">
         <RouterLink
-          class="btn btn-outline-secondary form-control fw-bold"
+          class="btn btn-outline-secondary m-1 form-control fw-bold"
           to="/"
-          >Back</RouterLink
+          >Back
+        </RouterLink>
+        <button
+          v-if="props.isEdit"
+          type="button"
+          class="btn btn-outline-danger form-control m-1 fw-bold"
+          @click="deleteClick"
         >
+          Delete
+        </button>
       </div>
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .pado {
   padding: 10px;
 }

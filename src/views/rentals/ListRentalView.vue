@@ -76,7 +76,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .pado {
   padding: 10px;
 }

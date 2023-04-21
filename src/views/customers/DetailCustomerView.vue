@@ -18,5 +18,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <SingleCustomer v-if="customer" :customer="customer" />
+  <SingleCustomer :isEdit="false" v-if="customer" :customer="customer" />
 </template>

@@ -1,10 +1,22 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import type ListMovieDto from "@/components/models/movies/list-movie.model";
+
+const deleteMessage = ref("");
+const deleteTitle = ref("");
+const showDeleteConfirmation = ref(false);
 
 interface Props {
   movie: ListMovieDto; 
+ isEdit?: boolean;
 }
 const props = defineProps<Props>();
+
+const emit = defineEmits(["deleteClick"]);
+
+const deleteClick = () => {
+  emit("deleteClick");
+};
 </script>
 <template>
   <div class="border pado">
@@ -30,15 +42,23 @@ const props = defineProps<Props>();
       </div>
       <div class="card-footer">
         <RouterLink
-          class="btn btn-outline-secondary form-control fw-bold"
+          class="btn btn-outline-secondary form-control m-1 fw-bold"
           to="/movies"
-          >Back</RouterLink
+          >Back
+          </RouterLink>
+          <button
+          v-if="props.isEdit"
+          type="button"
+          class="btn btn-outline-danger form-control m-1 fw-bold"
+          @click="deleteClick"
         >
+          Delete
+        </button>
       </div>
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .pado {
   padding: 10px;
 }
