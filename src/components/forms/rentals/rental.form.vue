@@ -2,7 +2,7 @@
 import type CustomerDto from "@/components/models/customers/customer.model";
 import type MovieDto from "@/components/models/movies/movie.model";
 import type RentalDto from "@/components/models/rentals/rental.model";
-import { ref, defineProps, defineEmits } from "vue";
+import { ref} from "vue";
 
 interface RentalFormProps{      
  customers: CustomerDto[];

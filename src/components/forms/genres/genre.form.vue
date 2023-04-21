@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type GenreDto from "@/components/models/genres/genre.model";
-import { ref, defineProps, defineEmits } from "vue";
+import { ref } from "vue";
 
 interface GenreFormProps {
   initialGenre: GenreDto;

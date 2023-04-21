@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type CustomerDto from "@/components/models/customers/customer.model";
-import { ref, defineProps, defineEmits} from "vue";
+import { ref} from "vue";
 
 interface CustomerFormProps{
       initialCustomer: CustomerDto
