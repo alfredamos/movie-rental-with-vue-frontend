@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import apiRental from "../../services/api-rental.service";
 import type ListRentalDto from "@/components/models/rentals/list-rental.model";
 import { RouterLink } from "vue-router";
+import moment from "moment";
 
 const rentals = ref<ListRentalDto[]>([]);
 
@@ -46,8 +47,8 @@ onMounted(() => {
               </td>
               <td>{{ rental.movie?.title }}</td>
               <td>{{ rental.rentalFee }}</td>
-              <td>{{ rental.dateOut}}</td>
-              <td>{{ rental.dateReturn }}</td>
+              <td>{{ moment(rental.dateOut).format("MMMM DD YYYY") }}</td>
+              <td>{{ moment(rental.dateReturn).format("MMMM DD YYYY") }}</td>
               <td>
                 <router-link
                   class="btn btn-outline-warning m-1 fw-bold"
