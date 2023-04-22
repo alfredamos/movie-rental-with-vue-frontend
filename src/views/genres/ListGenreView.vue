@@ -1,20 +1,10 @@
 <script setup lang="ts">
-import {ref, onMounted} from "vue"
 import type GenreDto from '@/components/models/genres/genre.model';
-import apiGenre from '../../services/api-genre.service';
+import genreUrl from '@/urls/genre.url';
+import { useFetch } from '@/composables/useFetch';
 
-const genres = ref<GenreDto[]>([])
-
-onMounted(() => {
-      apiGenre.findAll()
-      .then(resp => {
-            genres.value = resp.data
-            console.log(resp.data)
-            
-      })
-      .catch(err => console.log("error : ", err.message)
-      )
-})
+const {resource: genres} = useFetch<GenreDto[]>(genreUrl)
+ 
 </script>
 
 

@@ -13,6 +13,7 @@ const deleteClick = () => {
 }
 </script>
 <template>
+  
   <div class="border pado">
     <div class="card">
       <div class="card-header">

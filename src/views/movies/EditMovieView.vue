@@ -1,38 +1,20 @@
 <script setup lang="ts">
 import MovieForm from "@/components/forms/movies/movie.form.vue";
-import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import type MovieDto from "../../components/models/movies/movie.model";
 import apiMovie from "../../services/api-movie.service";
-import apiGenre from "../../services/api-genre.service";
 import type GenreDto from "../../components/models/genres/genre.model";
+import { useFetch } from "@/composables/useFetch";
+import genreUrl from "@/urls/genre.url";
+import movieUrl from "@/urls/movie.url";
 
 const { id } = useRoute().params;
 
-const genres = ref<GenreDto[]>([]);
-const movie = ref<MovieDto>(null!);
-
 const router = useRouter();
 
-onMounted(() => {
-  apiGenre
-    .findAll()
-    .then((resp) => {
-      genres.value = resp.data;
-      console.log("In edit-movie, genres : ", genres);
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const {resource: genres} = useFetch<GenreDto[]>(genreUrl)
 
-onMounted(() => {
-  apiMovie
-    .findOne(+id)
-    .then((resp) => {
-      movie.value = resp.data;
-      console.log("old-value of movie : ", resp.data);
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const {resource: movie} = useFetch<MovieDto>(`${movieUrl}/${id}`)
 
 const backToList = () => {
   router.push("/movies");

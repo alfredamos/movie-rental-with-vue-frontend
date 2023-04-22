@@ -1,27 +1,21 @@
 <script setup lang="ts">
 import SingleMovie from "./SingleMovie.vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import apiMovie from "../../services/api-movie.service";
 import type MovieDto from "../../components/models/movies/movie.model";
 import DeleteItemVue from '@/components/utils/DeleteItem.vue';
+import movieUrl from "@/urls/movie.url";
+import { useFetch } from "@/composables/useFetch";
 
 const { id } = useRoute().params;
 const router = useRouter();
 
-const movie = ref<MovieDto>(null!);
 const deleteMessage = ref("");
 const deleteTitle = ref("");
 const showDeleteConfirmation = ref(false);
 
-onMounted(() => {
-  apiMovie
-    .findOne(+id)
-    .then((resp) => {
-      movie.value = resp.data;
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const {resource: movie} = useFetch<MovieDto>(`${movieUrl}/${id}`)
 
 const deleteClick = () => {
   deleteMessage.value = `Do you really want to delete movie : ${movie.value.title}?`;

@@ -1,20 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import type CustomerDto from "@/components/models/customers/customer.model";
-import apiCustomer from "../../services/api-customer.service";
+import customerUrl from '@/urls/customer.url';
+import { useFetch } from "@/composables/useFetch";
 
-const customers = ref<CustomerDto[]>([]);
+const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
 
-onMounted(() => {
-  apiCustomer
-    .findAll()
-    .then((resp) => {
-      customers.value = resp.data;
-      console.log(resp.data);
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
-</script>
+ </script>
 
 <template>
   <div class="border pado">

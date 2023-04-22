@@ -19,9 +19,15 @@ export default class ApiService<T> {
     return axios.get(`${this.url}/${id}`);
   }
 
+  get(){
+    return axios.get(this.url);
+  }
+
   remove(id: number) {
     console.log("In delete, id : ", id);
     
     return axios.delete(`${this.url}/${id}`);
   }
 }
+
+

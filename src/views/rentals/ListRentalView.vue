@@ -1,21 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import apiRental from "../../services/api-rental.service";
 import type ListRentalDto from "@/components/models/rentals/list-rental.model";
 import { RouterLink } from "vue-router";
 import moment from "moment";
+import { useFetch } from '../../composables/useFetch';
+import rentalUrl from '@/urls/rental.url';
 
-const rentals = ref<ListRentalDto[]>([]);
+const {resource: rentals} = useFetch<ListRentalDto[]>(rentalUrl)
 
-onMounted(() => {
-  apiRental
-    .findAll()
-    .then((resp) => {
-      rentals.value = resp.data;
-      console.log(resp.data);
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
 </script>
 
 <template>

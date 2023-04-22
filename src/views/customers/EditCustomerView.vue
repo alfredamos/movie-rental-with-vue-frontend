@@ -1,25 +1,16 @@
 <script setup lang="ts">
 import CustomerForm from "@/components/forms/customers/customer.form.vue";
-import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import type CustomerDto from "../../components/models/customers/customer.model";
 import apiCustomer from "../../services/api-customer.service";
+import { useFetch } from "@/composables/useFetch";
+import customerUrl from "@/urls/customer.url";
 
 const {id} = useRoute().params
 
-const customer = ref<CustomerDto>(null!);
-
 const router = useRouter();
 
-
-onMounted(() => {
-      apiCustomer.findOne(+id)
-      .then(resp => {
-            customer.value = resp.data
-            console.log("old-value of customer : ", resp.data);
-            
-      })
-})
+const {resource : customer} = useFetch<CustomerDto>(`${customerUrl}/${id}`)
 
 const backToList = () => {
   router.push("/customers");

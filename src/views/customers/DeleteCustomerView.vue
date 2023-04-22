@@ -1,28 +1,21 @@
 <script setup lang="ts">
 import SingleCustomer from "./SingleCustomer.vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import apiCustomer from "../../services/api-customer.service";
 import type CustomerDto from "../../components/models/customers/customer.model";
 import DeleteItemVue from "@/components/utils/DeleteItem.vue";
-import router from '../../router/index';
+import { useFetch } from "@/composables/useFetch";
+import customerUrl from "@/urls/customer.url";
 
 const { id } = useRoute().params;
-
-const customer = ref<CustomerDto>(null!);
+const router = useRouter()
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
 const showDeleteConfirmation = ref(false);
 
-onMounted(() => {
-  apiCustomer
-    .findOne(+id)
-    .then((resp) => {
-      customer.value = resp.data;
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const {resource : customer} = useFetch<CustomerDto>(`${customerUrl}/${id}`)
 
 const deleteClick = () => {
   deleteMessage.value = `Do you really want to delete customer : ${customer.value.name}?`;
@@ -32,34 +25,36 @@ const deleteClick = () => {
 
 const deleteCustomer = (value: boolean) => {
   if (value) {
-      apiCustomer.remove(+id)
-      .then(resp => {
-            customer.value = resp.data
-            router.push("/customers")
+    apiCustomer
+      .remove(+id)
+      .then((resp) => {
+        customer.value = resp.data;
+        router.push("/customers");
       })
-      .catch(err => console.log("error : ", err.message)
-      )
+      .catch((err) => console.log("error : ", err.message));
   } else {
-      router.push("/customers")
+    router.push("/customers");
   }
 };
 </script>
 
 <template>
-  <Teleport v-if="showDeleteConfirmation" to="body">
+  <Teleport to="body" v-if="showDeleteConfirmation">
     <DeleteItemVue
+      v-if="showDeleteConfirmation"
       cancelButton="Cancel"
       submitButton="Delete"
       :deleteMessage="deleteMessage"
       :deleteTitle="deleteTitle"
       @onDeleteItem="deleteCustomer"
     />
-</Teleport>
+  </Teleport>
+
   <SingleCustomer
-    v-else="!showDeleteConfirmation"
+    v-else
+    v-if="customer"
     @deleteClick="deleteClick"
     :isEdit="true"
-    v-if="customer"
     :customer="customer"
   />
 </template>

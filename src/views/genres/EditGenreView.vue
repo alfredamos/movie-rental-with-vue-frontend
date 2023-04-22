@@ -4,24 +4,14 @@ import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import type GenreDto from "../../components/models/genres/genre.model";
 import apiGenre from "../../services/api-genre.service";
+import { useFetch } from "@/composables/useFetch";
+import genreUrl from "@/urls/genre.url";
 
 const {id} = useRoute().params
 
-const genre = ref<GenreDto>(null!);
-
 const router = useRouter();
 
-
-onMounted(() => {
-      apiGenre.findOne(+id)
-      .then(resp => {
-            genre.value = resp.data
-            console.log("old-value of genre : ", resp.data);
-            
-      })
-      .catch(err => console.log("error : ", err.message)
-      )
-})
+const {resource: genre} = useFetch<GenreDto>(`${genreUrl}/${id}`)
 
 const backToList = () => {
   router.push("/genres");

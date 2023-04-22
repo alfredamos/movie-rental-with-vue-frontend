@@ -1,27 +1,21 @@
 <script setup lang="ts">
 import SingleGenre from "./SingleGenre.vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import apiGenre from "../../services/api-genre.service";
 import type GenreDto from "../../components/models/genres/genre.model";
 import DeleteItemVue from "@/components/utils/DeleteItem.vue";
+import genreUrl from "@/urls/genre.url";
+import { useFetch } from '../../composables/useFetch';
 
 const { id } = useRoute().params;
 const router = useRouter();
-const genre = ref<GenreDto>(null!);
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
 const showDeleteConfirmation = ref(false);
 
-onMounted(() => {
-  apiGenre
-    .findOne(+id)
-    .then((resp) => {
-      genre.value = resp.data;
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const {resource: genre} = useFetch<GenreDto>(`${genreUrl}/${id}`)
 
 const deleteClick = () => {
   deleteMessage.value = `Do you really want to delete genre : ${genre.value.name}?`;

@@ -1,21 +1,9 @@
 <script setup lang="ts">
-import {ref, onMounted} from "vue"
-import apiMovie from '../../services/api-movie.service';
 import type ListMovieDto from "@/components/models/movies/list-movie.model";
+import { useFetch } from '../../composables/useFetch';
+import movieUrl from '@/urls/movie.url';
 
-const movies = ref<ListMovieDto[]>([])
-
-onMounted(() => {
-      apiMovie.findAll()
-      .then(resp => {
-            movies.value = resp.data
-            console.log(resp.data)
-            
-      })
-      .catch(err => console.log("error : ", err.message)
-      )
-})
-
+const {resource: movies} = useFetch<ListMovieDto[]>(movieUrl)
 </script>
 
 <template>

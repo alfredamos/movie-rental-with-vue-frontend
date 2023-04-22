@@ -1,21 +1,14 @@
 <script setup lang="ts">
 import SingleMovie from "./SingleMovie.vue";
-import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import apiMovie from "../../services/api-movie.service";
 import type MovieDto from '../../components/models/movies/movie.model';
+import { useFetch } from "@/composables/useFetch";
+import movieUrl from "@/urls/movie.url";
 
 const { id } = useRoute().params;
-const movie = ref<MovieDto>(null!);
 
-onMounted(() => {
-  apiMovie
-    .findOne(+id)
-    .then((resp) => {
-      movie.value = resp.data
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const {resource: movie} = useFetch<MovieDto>(`${movieUrl}/${id}`)
+
 </script>
 
 <template>

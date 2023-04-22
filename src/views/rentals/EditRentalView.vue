@@ -1,63 +1,32 @@
 <script setup lang="ts">
 import RentalForm from "@/components/forms/rentals/rental.form.vue";
-import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import type RentalDto from "../../components/models/rentals/rental.model";
 import apiRental from "../../services/api-rental.service";
-import apiCustomer from "../../services/api-customer.service";
 import type CustomerDto from "../../components/models/customers/customer.model";
-import apiMovie from '../../services/api-movie.service';
-import type MovieDto from '../../components/models/movies/movie.model';
-
-const customers = ref<CustomerDto[]>([]);
-const movies = ref<MovieDto[]>([])
-
-const rental = ref<RentalDto>({
-  id: 0,
-  customerId: 0,
-  movieId: 0,
-  rentalFee: 0,
-});
+import type MovieDto from "../../components/models/movies/movie.model";
+import { useFetch } from "@/composables/useFetch";
+import customerUrl from "@/urls/customer.url";
+import movieUrl from "@/urls/movie.url";
+import rentalUrl from "@/urls/rental.url";
+import type ListRentalDto from "@/components/models/rentals/list-rental.model";
 
 const router = useRouter();
-const {id} = useRoute().params
+const { id } = useRoute().params;
 
 const backToList = () => {
   router.push("/");
 };
 
-onMounted(() => {
-      apiRental.findOne(+id)
-      .then(resp => {
-            rental.value = resp.data
-      })
-      .catch(err => console.log("error : ", err.message)
-      )
-})
+const { resource: rental } = useFetch<ListRentalDto>(`${rentalUrl}/${id}`);
 
-onMounted(() => {
-  apiCustomer
-    .findAll()
-    .then((resp) => {
-      customers.value = resp.data;
-      console.log("In add-rental, customers : ", resp.data);
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const { resource: customers } = useFetch<CustomerDto[]>(customerUrl);
 
-onMounted(() => {
-  apiMovie
-    .findAll()
-    .then((resp) => {
-      movies.value = resp.data;
-      console.log("In add-rental, movies : ", resp.data);
-    })
-    .catch((err) => console.log("error : ", err.message));
-});
+const { resource: movies } = useFetch<MovieDto[]>(movieUrl);
 
 const submitRental = (rentalDto: RentalDto) => {
   apiRental
-    .edit(+id , rentalDto)
+    .edit(+id, rentalDto)
     .then((resp) => {
       rental.value = resp.data;
       console.log("new-rental : ", resp.data);
@@ -69,7 +38,7 @@ const submitRental = (rentalDto: RentalDto) => {
 
 <template>
   <RentalForm
-    v-if="customers.length > 0 && movies.length > 0 && rental"
+    v-if="customers && movies && rental"
     :customers="customers"
     :movies="movies"
     :initialRental="rental"
