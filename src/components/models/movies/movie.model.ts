@@ -1,7 +1,7 @@
 export default class MovieDto{
-      id = 0;
+      id = "";
       title!: string;
       numberInStock!: number;
       dailyRentalRate!: number;
-      genreId!: number;
+      genreId!: string;
 }

@@ -2,14 +2,16 @@
 import SingleCustomer from "./SingleCustomer.vue";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import apiCustomer from "../../services/api-customer.service";
 import type CustomerDto from "../../components/models/customers/customer.model";
 import DeleteItemVue from "@/components/utils/DeleteItem.vue";
 import { useFetch } from "@/composables/useFetch";
 import customerUrl from "@/urls/customer.url";
+import ApiGeneral from '../../services/api-general.service';
 
 const { id } = useRoute().params;
 const router = useRouter()
+
+const url = `${customerUrl}/${id}`
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
@@ -25,8 +27,8 @@ const deleteClick = () => {
 
 const deleteCustomer = (value: boolean) => {
   if (value) {
-    apiCustomer
-      .remove(+id)
+    ApiGeneral
+      .remove(url)
       .then((resp) => {
         customer.value = resp.data;
         router.push("/customers");

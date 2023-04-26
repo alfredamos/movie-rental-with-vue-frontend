@@ -2,14 +2,16 @@
 import SingleGenre from "./SingleGenre.vue";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import apiGenre from "../../services/api-genre.service";
 import type GenreDto from "../../components/models/genres/genre.model";
 import DeleteItemVue from "@/components/utils/DeleteItem.vue";
 import genreUrl from "@/urls/genre.url";
 import { useFetch } from '../../composables/useFetch';
+import ApiGeneral from '../../services/api-general.service';
 
 const { id } = useRoute().params;
 const router = useRouter();
+
+const url = `${genreUrl}/${id}`
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
@@ -25,8 +27,8 @@ const deleteClick = () => {
 
 const deleteGenre = (value: boolean) => {
   if (value) {
-    apiGenre
-      .remove(+id)
+    ApiGeneral
+      .remove(url)
       .then((resp) => {
         genre.value = resp.data;
         router.push("/genres");

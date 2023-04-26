@@ -6,10 +6,8 @@ import DetailRentalView from "../views/rentals/DetailRentalView.vue";
 import EditRentalView from "../views/rentals/EditRentalView.vue";
 
 import ListCustomerView from "../views/customers/ListCustomerView.vue";
-import AddCustomerView from "../views/customers/AddCustomerView.vue";
 import DeleteCustomerView from "../views/customers/DeleteCustomerView.vue";
 import DetailCustomerView from "../views/customers/DetailCustomerView.vue";
-import EditCustomerView from "../views/customers/EditCustomerView.vue";
 
 import ListGenreView from "../views/genres/ListGenreView.vue";
 import AddGenreView from "../views/genres/AddGenreView.vue";
@@ -56,12 +54,7 @@ const router = createRouter({
       path: "/customers",
       name: "list-customer",
       component: ListCustomerView,
-    },
-    {
-      path: "/add-customer",
-      name: "add-customer",
-      component: AddCustomerView,
-    },
+    },    
     {
       path: "/delete-customer/:id",
       name: "delete-customer",
@@ -72,12 +65,7 @@ const router = createRouter({
       name: "detail-customer",
       component: DetailCustomerView,
     },
-    {
-      path: "/edit-customer/:id",
-      name: "edit-customer",
-      component: EditCustomerView,
-    },
-
+        
     {
       path: "/genres",
       name: "list-genre",

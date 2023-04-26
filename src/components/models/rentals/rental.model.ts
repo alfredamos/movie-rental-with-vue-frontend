@@ -1,8 +1,8 @@
 export default class RentalDto{
-      id = 0;
+      id = "";
       rentalFee!: number;
       dateOut?: Date;     
       dateReturn?: Date;
-      customerId!: number;
-      movieId!: number;
+      customerId!: string;
+      movieId!: string;
 }

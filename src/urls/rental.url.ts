@@ -1,3 +1,3 @@
-const rentalUrl = "https://localhost:7149/api/rentals";
+const rentalUrl = "/rentals";
 
 export default rentalUrl;

@@ -2,14 +2,16 @@
 import SingleMovie from "./SingleMovie.vue";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import apiMovie from "../../services/api-movie.service";
 import type MovieDto from "../../components/models/movies/movie.model";
 import DeleteItemVue from '@/components/utils/DeleteItem.vue';
 import movieUrl from "@/urls/movie.url";
 import { useFetch } from "@/composables/useFetch";
+import ApiGeneral from '../../services/api-general.service';
 
 const { id } = useRoute().params;
 const router = useRouter();
+
+const url = `${movieUrl}/${id}`
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
@@ -25,8 +27,8 @@ const deleteClick = () => {
 
 const deleteMovie = (value: boolean) => {
   if (value) {
-    apiMovie
-      .remove(+id)
+    ApiGeneral
+      .remove(url)
       .then((resp) => {
         movie.value = resp.data;
         router.push("/movies");

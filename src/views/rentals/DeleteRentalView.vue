@@ -2,14 +2,16 @@
 import SingleRental from "./SingleRental.vue";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import apiRental from "../../services/api-rental.service";
 import type ListRentalDto from "../../components/models/rentals/list-rental.model";
 import DeleteItemVue from "@/components/utils/DeleteItem.vue";
 import { useFetch } from '../../composables/useFetch';
 import rentalUrl from "@/urls/rental.url";
+import ApiGeneral from '../../services/api-general.service';
 
 const { id } = useRoute().params;
 const router = useRouter();
+
+const url = `${rentalUrl}/${id}`
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
@@ -24,8 +26,8 @@ const deleteClick = () => {
 
 const deleteRental = (value: boolean) => {
   if (value) {
-    apiRental
-      .remove(+id)
+    ApiGeneral
+      .remove(url)
       .then((resp) => {
         rental.value = resp.data;
         router.push("/");

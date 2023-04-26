@@ -1,3 +1,3 @@
-const customerUrl = "https://localhost:7149/api/customers";
+const customerUrl = "/customers";
 
 export default customerUrl

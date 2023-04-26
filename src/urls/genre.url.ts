@@ -1,3 +1,3 @@
-const genreUrl = "https://localhost:7149/api/genres";
+const genreUrl = "/api/genres";
 
 export default genreUrl;
