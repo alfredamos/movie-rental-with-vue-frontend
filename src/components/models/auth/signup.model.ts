@@ -1,7 +1,6 @@
-import type UserType from "../enum/user-type.enum";
-
+import type UserType from "@/enum/user-type.enum";
 class SignupDto {
-  fullName!: string;
+  name!: string;
   email!: string;
   gender!: string;
   phone!: string;

@@ -22,7 +22,7 @@ const backToList = () => {
 
 const submitMovie = (movieDto: MovieDto) => {
   apiMovie
-    .edit(+id, movieDto)
+    .edit(String(id), movieDto)
     .then((resp) => {
       movie.value = resp.data;
       console.log("edited-movie : ", resp.data);

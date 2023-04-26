@@ -1,18 +1,14 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import type SignupDto from "../../models/auth/signup.model";
-import type DepartmentDto from "../../models/departments/department.model";
-import Gender from '../../models/enum/gender.enum';
+import Gender from "@/enum/gender.enum";
 
-interface Props { 
-  departments: DepartmentDto[];
-}
 
-const { departments } = defineProps<Props>();
+
 const emit = defineEmits(["onBackToList", "onSignupSubmit"]);
 
 const signup = ref<SignupDto>({
-  fullName: "",
+  name: "",
   email: "",
   phone: "",
   dateOfBirth: new Date(),
@@ -46,7 +42,7 @@ const submitSignup = () => {
             <input
             id="fullName"
               type="text"
-              v-model.trim="signup.fullName"
+              v-model.trim="signup.name"
               class="form-control"
             />
           </div>
@@ -106,19 +102,7 @@ const submitSignup = () => {
               <option value="Male">Male</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="departmentId" class="form-label">Department</label>
-            <select id="departmentId" v-model="signup.departmentId" class="form-select">
-              <option value="">Please select department</option>
-              <option
-                v-for="department in departments"
-                :value="department.id"
-                :key="department.id"
-              >
-                {{ department.name }}
-              </option>
-            </select>
-          </div>
+          
         </div>
         <div class="card-footer">
           <button

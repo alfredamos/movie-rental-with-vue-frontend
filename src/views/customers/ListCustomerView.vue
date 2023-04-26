@@ -3,6 +3,9 @@ import type CustomerDto from "@/components/models/customers/customer.model";
 import customerUrl from '@/urls/customer.url';
 import { useFetch } from "@/composables/useFetch";
 
+console.log({customerUrl});
+
+
 const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
 
  </script>
@@ -53,7 +56,7 @@ const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
         </table>
       </div>
       <div class="card-footer">
-        <RouterLink class="btn btn-outline-secondary form-control m-1 fw-bold" to="/add-customer">Add Customer</RouterLink>
+        <RouterLink class="btn btn-outline-secondary form-control m-1 fw-bold" to="/signup">Add Customer</RouterLink>
       </div>
     </div>
   </div>

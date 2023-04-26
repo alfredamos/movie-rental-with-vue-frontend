@@ -1,14 +1,12 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import type EditProfileDto from "../../models/auth/edit-profile.model";
-import type DepartmentDto from "../../models/departments/department.model";
 
 interface Props {
   oldProfile: EditProfileDto;
-  departments: DepartmentDto[];
 }
 
-const { oldProfile, departments } = defineProps<Props>();
+const { oldProfile} = defineProps<Props>();
 const emit = defineEmits(["onBackToList", "onEditProfileSubmit"]);
 
 const editProfile = ref<EditProfileDto>(oldProfile);
@@ -35,7 +33,7 @@ const submitEditProfile = () => {
             <input
               id="fullName"
               type="text"
-              v-model="editProfile.fullName"
+              v-model="editProfile.name"
               class="form-control"
             />
           </div>
@@ -93,23 +91,6 @@ const submitEditProfile = () => {
             >
               <option value="Female">Female</option>
               <option value="Male">Male</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="departmentId" class="form-label">Department</label>
-            <select
-              id="departmentId"
-              v-model="editProfile.departmentId"
-              class="form-select"
-            >
-              <option value="">Please select department</option>
-              <option
-                v-for="department in departments"
-                :value="department.id"
-                :key="department.id"
-              >
-                {{ department.name }}
-              </option>
             </select>
           </div>
         </div>

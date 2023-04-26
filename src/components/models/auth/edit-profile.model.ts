@@ -1,8 +1,7 @@
-import type Gender from "../enum/gender.enum";
-import type UserType from "../enum/user-type.enum";
-
+import type Gender from "@/enum/gender.enum";
+import type UserType from "@/enum/user-type.enum";
 class EditProfileDto {
-  fullName!: string;
+  name!: string;
   email!: string;
   phone!: string;
   gender!: Gender; 

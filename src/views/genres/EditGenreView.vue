@@ -7,7 +7,7 @@ import apiGenre from "../../services/api-genre.service";
 import { useFetch } from "@/composables/useFetch";
 import genreUrl from "@/urls/genre.url";
 
-const {id} = useRoute().params
+const {id} =useRoute().params;
 
 const router = useRouter();
 
@@ -18,7 +18,7 @@ const backToList = () => {
 };
 
 const submitGenre = (genreDto: GenreDto) => {
-  apiGenre.edit(+id , genreDto).then((resp) => {
+  apiGenre.edit(String(id) , genreDto).then((resp) => {
     genre.value = resp.data;
     console.log("edited-genre : ", resp.data);
     router.push("/genres");

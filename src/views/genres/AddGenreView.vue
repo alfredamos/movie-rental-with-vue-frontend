@@ -6,7 +6,7 @@ import type GenreDto from "../../components/models/genres/genre.model";
 import apiGenre from "../../services/api-genre.service";
 
 const genre = ref<GenreDto>({
-  id: 0,
+  id: "",
   name: ""
 });
 

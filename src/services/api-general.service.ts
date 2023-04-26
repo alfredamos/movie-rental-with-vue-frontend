@@ -13,4 +13,3 @@ export default class ApiGeneral {
 
 
 
-const apiGeneral = new ApiGeneral()

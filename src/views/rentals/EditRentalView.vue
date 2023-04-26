@@ -26,7 +26,7 @@ const { resource: movies } = useFetch<MovieDto[]>(movieUrl);
 
 const submitRental = (rentalDto: RentalDto) => {
   apiRental
-    .edit(+id, rentalDto)
+    .edit(String(id), rentalDto)
     .then((resp) => {
       rental.value = resp.data;
       console.log("new-rental : ", resp.data);

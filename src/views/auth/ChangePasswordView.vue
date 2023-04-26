@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import type ChangePasswordDto from "../../models/auth/change-password.model";
+import type AuthUserDto from "@/components/models/auth/auth-user.model";
+import type ChangePasswordDto from "@/components/models/auth/change-password.model";
 import ApiAuth from "../../services/api-auth.service";
-import type AuthUserDto from "../../models/auth/auth-user.model";
 import { apiContext } from "../../behavior-subject/auth-context.rxjs";
-import ChangePasswordForm from "@/components/forms/ChangePasswordForm.vue";
+import ChangePasswordForm from "@/components/forms/auth/ChangePasswordForm.vue";
 
 const router = useRouter();
 

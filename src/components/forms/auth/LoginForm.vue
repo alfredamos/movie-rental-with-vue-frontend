@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type LoginDto from "@/models/auth/login.model";
 import { ref } from "vue";
+import type LoginDto from '@/components/models/auth/login.model';
 
 const login = ref<LoginDto>({
   email: "",

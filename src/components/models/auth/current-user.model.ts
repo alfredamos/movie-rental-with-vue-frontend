@@ -1,8 +1,7 @@
-import type Gender from "../enum/gender.enum";
-
+import type Gender from "@/enum/gender.enum";
 class CurrentUserDto{
       id!: string;
-      fullName!: string;
+      name!: string;
       email!: string;
       phone!: string;
       dateOfBirth!: Date;

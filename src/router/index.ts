@@ -20,6 +20,11 @@ import AddMovieView from "../views/movies/AddMovieView.vue";
 import DeleteMovieView from "../views/movies/DeleteMovieView.vue";
 import DetailMovieView from "../views/movies/DetailMovieView.vue";
 import EditMovieView from "../views/movies/EditMovieView.vue";
+import ChangePasswordView from "@/views/auth/ChangePasswordView.vue";
+import LoginView from "@/views/auth/LoginView.vue";
+import LogoutView from "@/views/auth/LogoutView.vue";
+import EditProfileView from "@/views/auth/EditProfileView.vue";
+import SignupView from "@/views/auth/SignupView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -116,6 +121,32 @@ const router = createRouter({
       path: "/edit-movie/:id",
       name: "edit-movie",
       component: EditMovieView,
+    },
+
+    {
+      path: "/change-password",
+      name: "change-password",
+      component: ChangePasswordView
+    },
+    {
+      path: "/edit-profile",
+      name: "edit-profile",
+      component: EditProfileView
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: LoginView
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: LogoutView
+    },
+    {
+      path: "/signup",
+      name: "signup",
+      component: SignupView
     },
   ],
 });

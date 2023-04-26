@@ -1,3 +1,3 @@
-const genreUrl = "/api/genres";
+const genreUrl = "/genres";
 
 export default genreUrl;

@@ -40,7 +40,6 @@ class AuthContext {
   }
 
   logout(value: AuthUserDto) {
-    //provide("authUser", value);
     console.log("In context-logout, value", value);
     this.updateAuthUser$(value);
     this.removeUser();

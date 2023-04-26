@@ -2,8 +2,8 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { apiContext } from "../../behavior-subject/auth-context.rxjs";
-import LogoutItemView from "@/utils/DeleteItem.vue";
 import { initialAuthUser } from "../../utils/authUser-initial.util";
+import LogoutItemView from "@/utils/DeleteItem.vue";
 
 const router = useRouter();
 

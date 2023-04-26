@@ -1,3 +1,3 @@
-const movieUrl = "/api/movies";
+const movieUrl = "/movies";
 
 export default movieUrl;

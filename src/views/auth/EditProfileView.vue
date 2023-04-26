@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import type EditProfileDto from "../../models/auth/edit-profile.model";
+import type EditProfileDto from "@/components/models/auth/edit-profile.model";
+import type AuthUserDto from "@/components/models/auth/auth-user.model";
+import type CurrentUserDto from "@/components/models/auth/current-user.model";
 import ApiAuth from "../../services/api-auth.service";
-import type AuthUserDto from "../../models/auth/auth-user.model";
 import { apiContext } from "../../behavior-subject/auth-context.rxjs";
-import EditProfileForm from "@/components/forms/EditProfileForm.vue";
-import type DepartmentDto from '../../models/departments/department.model';
-import type CurrentUserDto from '../../models/auth/current-user.model';
-import { useFetch } from '../../composable/useFetch';
-import departmentBaseUrl from '../../utils/department-url.util';
+import EditProfileForm from "@/components/forms/auth/EditProfileForm.vue";
 
 const router = useRouter();
 
 const authUser = ref<AuthUserDto>(null!);
 const currentUser = ref<CurrentUserDto>(null!)
 currentUser.value = apiContext.getAuthUser().user!
-const {resource: departments} = useFetch<DepartmentDto[]>(departmentBaseUrl)
 console.log({currentUser});
 
 const oldProfile = ref<EditProfileDto>({
@@ -47,9 +43,8 @@ const backToList = () => {
 
 <template>
   <EditProfileForm
-  v-if="departments && oldProfile"
+  v-if="oldProfile"
   :oldProfile="oldProfile"
-  :departments="departments"
   @onBackToList="backToList"
   @onEditProfileSubmit="editProfileSubmit"
   />

@@ -33,6 +33,12 @@ import { RouterLink } from "vue-router";
           <li class="nav-item">
             <RouterLink to="/movies" class="nav-link">Movies</RouterLink>
           </li>
+          <li class="nav-item">
+            <RouterLink to="/login" class="nav-link">Login</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink to="/logout" class="nav-link">Logout</RouterLink>
+          </li>
         </ul>
       </div>
     </div>

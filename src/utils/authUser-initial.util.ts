@@ -5,7 +5,7 @@ import UserType from "@/enum/user-type.enum";
 
 export const initialCurrentUser: CurrentUserDto = {
   id: "",
-  fullName: "",
+  name: "",
   email: "",
   phone: "",
   departmentId: "",
@@ -16,7 +16,7 @@ export const initialCurrentUser: CurrentUserDto = {
 export const initialAuthUser: AuthUserDto = {
   user: initialCurrentUser,
   id: "",
-  fullName: "",
+  name: "",
   isLoggedIn: false,
   message: "Not yet Logged-in",
   userType: UserType.Customer,

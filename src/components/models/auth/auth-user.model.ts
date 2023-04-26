@@ -1,14 +1,14 @@
-import type UserType from "../enum/user-type.enum";
 import type CurrentUserDto from "./current-user.model";
+import type UserType from "@/enum/user-type.enum";
 
 class AuthUserDto {
   id!: string;
-  fullName!: string;
+  name!: string;
   userType!: UserType;
   token?: string;
   message?: string;
   isLoggedIn?: boolean;
-  user?: CurrentUserDto
+  user?: CurrentUserDto;
 }
 
-export default AuthUserDto
+export default AuthUserDto;
