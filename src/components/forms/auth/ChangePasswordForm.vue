@@ -2,13 +2,13 @@
 import { ref } from "vue";
 import type ChangePasswordDto from '../../models/auth/change-password.model';
 
-const changePassword = ref<ChangePasswordDto>({
-  email: "",
-  password: "",
-  newPassword: "",
-  confirmPassword: ""
+interface Props{
+  oldAuthInfo: ChangePasswordDto;
+}
 
-});
+const {oldAuthInfo} = defineProps<Props>()
+
+const changePassword = ref<ChangePasswordDto>(oldAuthInfo);
 
 const emit = defineEmits(["onChangePasswordSubmit", "onBackToList"]);
 

@@ -40,8 +40,6 @@ apiContext.authUser$.pipe(
   //take(2)
 ).subscribe()
 
-console.log("isLoggedIn : ", authUser.value.isLoggedIn);
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

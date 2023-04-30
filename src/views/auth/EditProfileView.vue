@@ -5,12 +5,13 @@ import type EditProfileDto from "@/components/models/auth/edit-profile.model";
 import ApiAuth from "../../services/api-auth.service";
 import { apiContext } from "../../behavior-subject/auth-context.rxjs";
 import EditProfileForm from "@/components/forms/auth/EditProfileForm.vue";
-import type CurrentUserDto from '../../components/models/auth/current-user.model';
+import type CurrentUserDto from "../../components/models/auth/current-user.model";
 
 const router = useRouter();
 
-const userCurrent = ref<CurrentUserDto>(apiContext.getAuthUser().user!)
+const authUser = apiContext.getAuthUser();
 
+const userCurrent = ref<CurrentUserDto>(authUser.user!);
 
 const oldProfile = ref<EditProfileDto>({
   ...userCurrent.value,
@@ -19,7 +20,6 @@ const oldProfile = ref<EditProfileDto>({
 });
 
 const editProfileSubmit = (editProfileDto: EditProfileDto) => {
-
   ApiAuth.editProfile(editProfileDto)
     .then((resp) => {
       apiContext.updateAuthUser$(resp.data);
