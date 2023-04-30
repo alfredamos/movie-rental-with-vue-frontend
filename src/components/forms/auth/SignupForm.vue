@@ -33,7 +33,7 @@ const submitSignup = () => {
     <form @submit.prevent="submitSignup">
       <div class="card">
         <div class="card-header">
-          <h4 class="text-center">Edit Profile Form</h4>
+          <h4 class="text-center">Signup Form</h4>
         </div>
         <div class="card-body">
           <div class="mb-3">
@@ -80,16 +80,7 @@ const submitSignup = () => {
               v-model.trim="signup.confirmPassword"
               class="form-control"
             />
-          </div>
-          <div class="mb-3">
-            <label for="dateOfBirth" class="form-label">Birthday</label>
-            <input
-            id="dateOfBirth"
-              type="date"
-              v-model="signup.dateOfBirth"
-              class="form-control"
-            />
-          </div>
+          </div>          
           <div class="mb-3">
             <label for="gender" class="form-label">Gender</label>
             <select
