@@ -14,6 +14,7 @@ const deleteClick = () => {
   emit("deleteClick");
 };
 </script>
+
 <template>
   <div class="border pado">
     <div class="card">
@@ -56,6 +57,7 @@ const deleteClick = () => {
     </div>
   </div>
 </template>
+
 <style scoped>
 .pado {
   padding: 10px;

@@ -4,9 +4,8 @@ class CurrentUserDto{
       name!: string;
       email!: string;
       phone!: string;
-      dateOfBirth!: Date;
-      departmentId!: string;
-      gender!: Gender
+      gender!: Gender;
+      isGold?: boolean;
 }
 
 export default CurrentUserDto

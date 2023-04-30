@@ -44,6 +44,7 @@ const deleteClick = () => {
     </div>
   </div>
 </template>
+
 <style scoped>
 .pado {
   padding: 10px;

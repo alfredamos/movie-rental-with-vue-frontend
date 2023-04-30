@@ -8,9 +8,7 @@ export const initialCurrentUser: CurrentUserDto = {
   name: "",
   email: "",
   phone: "",
-  departmentId: "",
   gender: Gender.Male,
-  dateOfBirth: new Date(),
 };
 
 export const initialAuthUser: AuthUserDto = {

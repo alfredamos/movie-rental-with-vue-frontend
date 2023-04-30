@@ -10,11 +10,11 @@ import type GenreDto from "../../components/models/genres/genre.model";
 const genres = ref<GenreDto[]>([]);
 
 const movie = ref<MovieDto>({
-  id: 0,
+  id: "",
   title: "",
   dailyRentalRate: 0,
   numberInStock: 0,
-  genreId: 0,
+  genreId: "",
 });
 
 const router = useRouter();

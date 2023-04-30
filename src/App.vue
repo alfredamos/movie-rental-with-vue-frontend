@@ -9,4 +9,4 @@ import NavigationBar from "./components/utils/NavigationBar.vue";
   <RouterView />
 </template>
 
-<style scoped></style>
+

@@ -2,52 +2,43 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import type EditProfileDto from "@/components/models/auth/edit-profile.model";
-import type AuthUserDto from "@/components/models/auth/auth-user.model";
-import type CurrentUserDto from "@/components/models/auth/current-user.model";
 import ApiAuth from "../../services/api-auth.service";
 import { apiContext } from "../../behavior-subject/auth-context.rxjs";
 import EditProfileForm from "@/components/forms/auth/EditProfileForm.vue";
+import type CurrentUserDto from '../../components/models/auth/current-user.model';
 
 const router = useRouter();
 
-const authUser = ref<AuthUserDto>(null!);
-const currentUser = ref<CurrentUserDto>(null!)
-currentUser.value = apiContext.getAuthUser().user!
-console.log({currentUser});
+const userCurrent = ref<CurrentUserDto>(apiContext.getAuthUser().user!)
+
 
 const oldProfile = ref<EditProfileDto>({
-     ...currentUser.value,     
-     password: "",
-     newPassword: ""
-})
+  ...userCurrent.value,
+  password: "",
+  newPassword: "",
+});
 
 const editProfileSubmit = (editProfileDto: EditProfileDto) => {
-  console.log("editProfile, editProfileDto : ", editProfileDto);
 
   ApiAuth.editProfile(editProfileDto)
-  .then((resp) => {
-    authUser.value = resp.data;
+    .then((resp) => {
+      apiContext.updateAuthUser$(resp.data);
 
-    apiContext.updateAuthUser$(authUser.value);
-
-    router.push("/");
-  })
-  .catch(err => console.log("error : ", err.message)
-  )
+      router.push("/");
+    })
+    .catch((err) => console.log("error : ", err.message));
 };
 
 const backToList = () => {
-      router.push("/")
-}
+  router.push("/");
+};
 </script>
 
 <template>
   <EditProfileForm
-  v-if="oldProfile"
-  :oldProfile="oldProfile"
-  @onBackToList="backToList"
-  @onEditProfileSubmit="editProfileSubmit"
+    v-if="oldProfile"
+    :oldProfile="oldProfile"
+    @onBackToList="backToList"
+    @onEditProfileSubmit="editProfileSubmit"
   />
 </template>
-
-

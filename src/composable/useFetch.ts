@@ -4,8 +4,6 @@ import { ref, onMounted } from "vue";
 export function useFetch<T>(url: string) {
   const resource = ref<T>(null!);
 
-  console.log({ url });
-
   onMounted(() => {
     ApiGeneral
       .get(url)

@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import type CustomerDto from "@/components/models/customers/customer.model";
-import customerUrl from '@/urls/customer.url';
+import customerUrl from "@/urls/customer.url";
 import { useFetch } from "@/composables/useFetch";
+import Gender from '@/enum/gender.enum';
 
-console.log({customerUrl});
+console.log({ customerUrl });
 
-
-const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
-
- </script>
+const { resource: customers } = useFetch<CustomerDto[]>(customerUrl);
+</script>
 
 <template>
   <div class="border pado">
@@ -23,6 +22,7 @@ const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
               <th>Name</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Gender</th>
               <th>Gold</th>
               <th>Actions</th>
             </tr>
@@ -38,13 +38,9 @@ const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
               </td>
               <td>{{ customer.email }}</td>
               <td>{{ customer.phone }}</td>
+              <td>{{ customer.gender }}</td>
               <td>{{ customer.isGold ? "Yes" : "No" }}</td>
               <td>
-                <router-link
-                  class="btn btn-outline-warning m-1 fw-bold"
-                  :to="`/edit-customer/${customer.id}`"
-                  >Edit</router-link
-                >
                 <router-link
                   class="btn btn-outline-danger m-1 fw-bold"
                   :to="`/delete-customer/${customer.id}`"
@@ -56,7 +52,11 @@ const {resource : customers} = useFetch<CustomerDto[]>(customerUrl)
         </table>
       </div>
       <div class="card-footer">
-        <RouterLink class="btn btn-outline-secondary form-control m-1 fw-bold" to="/signup">Add Customer</RouterLink>
+        <RouterLink
+          class="btn btn-outline-secondary form-control m-1 fw-bold"
+          to="/signup"
+          >Add Customer</RouterLink
+        >
       </div>
     </div>
   </div>

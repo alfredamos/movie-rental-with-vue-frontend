@@ -6,7 +6,6 @@ class SignupDto {
   phone!: string;
   password!: string;
   confirmPassword!: string;
-  departmentId!: number;
   userTyPe?: UserType;
   dateOfBirth?: Date;
 }

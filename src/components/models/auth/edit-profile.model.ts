@@ -7,9 +7,7 @@ class EditProfileDto {
   gender!: Gender; 
   password!: string;
   newPassword!: string;
-  departmentId!: string;
   userTyPe?: UserType;
-  dateOfBirth?: Date;
 }
 
 export default EditProfileDto

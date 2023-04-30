@@ -16,8 +16,10 @@ export function useAuthUser() {
   onMounted(() => {
     subscription = apiContext.authUser$
       .pipe(
-        tap((user: AuthUserDto) => {
+        tap((user: AuthUserDto) => {          
           authUser.value = user;
+          currentUser.value = user.user!;          
+          
         })
       )
       .subscribe();

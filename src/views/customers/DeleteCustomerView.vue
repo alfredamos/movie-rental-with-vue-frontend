@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import SingleCustomer from "./SingleCustomer.vue";
-import { ref } from "vue";
+import { ref, provide } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type CustomerDto from "../../components/models/customers/customer.model";
 import DeleteItemVue from "@/components/utils/DeleteItem.vue";
 import { useFetch } from "@/composables/useFetch";
 import customerUrl from "@/urls/customer.url";
-import ApiGeneral from '../../services/api-general.service';
+import ApiGeneral from "../../services/api-general.service";
 
 const { id } = useRoute().params;
-const router = useRouter()
+const router = useRouter();
 
-const url = `${customerUrl}/${id}`
+const url = `${customerUrl}/${id}`;
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
 const showDeleteConfirmation = ref(false);
 
-const {resource : customer} = useFetch<CustomerDto>(`${customerUrl}/${id}`)
+const { resource: customer } = useFetch<CustomerDto>(`${customerUrl}/${id}`);
 
 const deleteClick = () => {
   deleteMessage.value = `Do you really want to delete customer : ${customer.value.name}?`;
@@ -25,10 +25,10 @@ const deleteClick = () => {
   showDeleteConfirmation.value = true;
 };
 
+
 const deleteCustomer = (value: boolean) => {
   if (value) {
-    ApiGeneral
-      .remove(url)
+    ApiGeneral.remove(url)
       .then((resp) => {
         customer.value = resp.data;
         router.push("/customers");
@@ -41,19 +41,16 @@ const deleteCustomer = (value: boolean) => {
 </script>
 
 <template>
-  <Teleport to="body" v-if="showDeleteConfirmation">
-    <DeleteItemVue
-      v-if="showDeleteConfirmation"
-      cancelButton="Cancel"
-      submitButton="Delete"
-      :deleteMessage="deleteMessage"
-      :deleteTitle="deleteTitle"
-      @onDeleteItem="deleteCustomer"
-    />
-  </Teleport>
+  <DeleteItemVue
+    v-if="showDeleteConfirmation"
+    cancelButton="Cancel"
+    submitButton="Delete"
+    :deleteMessage="deleteMessage"
+    :deleteTitle="deleteTitle"
+    @onDeleteItem="deleteCustomer"
+  />
 
   <SingleCustomer
-    v-else
     v-if="customer"
     @deleteClick="deleteClick"
     :isEdit="true"

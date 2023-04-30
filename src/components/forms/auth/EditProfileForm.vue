@@ -72,16 +72,7 @@ const submitEditProfile = () => {
               v-model="editProfile.newPassword"
               class="form-control"
             />
-          </div>
-          <div class="mb-3">
-            <label for="dateOfBirth" class="form-label">Birthday</label>
-            <input
-              id="dateOfBirth"
-              type="date"
-              v-model="editProfile.dateOfBirth"
-              class="form-control"
-            />
-          </div>
+          </div>          
           <div class="mb-3">
             <label for="gender" class="form-label">Gender</label>
             <select

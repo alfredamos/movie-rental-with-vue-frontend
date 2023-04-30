@@ -13,9 +13,9 @@ const customers = ref<CustomerDto[]>([]);
 const movies = ref<MovieDto[]>([])
 
 const rental = ref<RentalDto>({
-  id: 0,
-  customerId: 0,
-  movieId: 0,
+  id: "",
+  customerId: "",
+  movieId: "",
   rentalFee: 0,
 });
 

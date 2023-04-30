@@ -3,21 +3,21 @@ import SingleMovie from "./SingleMovie.vue";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import type MovieDto from "../../components/models/movies/movie.model";
-import DeleteItemVue from '@/components/utils/DeleteItem.vue';
+import DeleteItemVue from "@/components/utils/DeleteItem.vue";
 import movieUrl from "@/urls/movie.url";
 import { useFetch } from "@/composables/useFetch";
-import ApiGeneral from '../../services/api-general.service';
+import ApiGeneral from "../../services/api-general.service";
 
 const { id } = useRoute().params;
 const router = useRouter();
 
-const url = `${movieUrl}/${id}`
+const url = `${movieUrl}/${id}`;
 
 const deleteMessage = ref("");
 const deleteTitle = ref("");
 const showDeleteConfirmation = ref(false);
 
-const {resource: movie} = useFetch<MovieDto>(`${movieUrl}/${id}`)
+const { resource: movie } = useFetch<MovieDto>(`${movieUrl}/${id}`);
 
 const deleteClick = () => {
   deleteMessage.value = `Do you really want to delete movie : ${movie.value.title}?`;
@@ -27,8 +27,7 @@ const deleteClick = () => {
 
 const deleteMovie = (value: boolean) => {
   if (value) {
-    ApiGeneral
-      .remove(url)
+    ApiGeneral.remove(url)
       .then((resp) => {
         movie.value = resp.data;
         router.push("/movies");
@@ -41,18 +40,18 @@ const deleteMovie = (value: boolean) => {
 </script>
 
 <template>
-  <Teleport v-if="showDeleteConfirmation" to="body">
-    <DeleteItemVue
-      cancelButton="Cancel"
-      submitButton="Delete"
-      :deleteMessage="deleteMessage"
-      :deleteTitle="deleteTitle"
-      @onDeleteItem="deleteMovie"
-    />
-  </Teleport>
+  <DeleteItemVue
+    v-if="showDeleteConfirmation"
+    cancelButton="Cancel"
+    submitButton="Delete"
+    :deleteMessage="deleteMessage"
+    :deleteTitle="deleteTitle"
+    @onDeleteItem="deleteMovie"
+  />
+
   <SingleMovie
     :isEdit="true"
-    v-if="movie && !showDeleteConfirmation"
+    v-if="movie"
     :movie="movie"
     @deleteClick="deleteClick"
   />

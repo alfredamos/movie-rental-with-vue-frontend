@@ -65,7 +65,7 @@ const backToList = () => {
     </form>
   </div>
 </template>
-<style>
+<style scoped>
 .pado {
   padding: 10px;
 }
